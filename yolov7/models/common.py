@@ -14,7 +14,7 @@ from torch.cuda import amp
 from yolov7.utils.datasets import letterbox
 from yolov7.utils.general import increment_path, make_divisible, non_max_suppression, scale_coords, xyxy2xywh
 from yolov7.utils.plots import color_list, plot_one_box
-from yolov7.utils.torch_utils import time_synchronized
+from yolov7.utils.torch_utils import copy_attr, time_synchronized
 
 ##### basic ####
 
@@ -891,6 +891,7 @@ class autoShape(nn.Module):
 
     def __init__(self, model):
         super(autoShape, self).__init__()
+        copy_attr(self, model, include=("yaml", "nc", "hyp", "names", "stride", "abc"), exclude=())  # copy attributes
         self.model = model.eval()
 
     def autoshape(self):
