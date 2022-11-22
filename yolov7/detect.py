@@ -5,10 +5,11 @@ from pathlib import Path
 import cv2
 import torch
 import torch.backends.cudnn as cudnn
-from models.experimental import attempt_load
 from numpy import random
-from utils.datasets import LoadImages, LoadStreams
-from utils.general import (
+
+from yolov7.models.experimental import attempt_load
+from yolov7.utils.datasets import LoadImages, LoadStreams
+from yolov7.utils.general import (
     apply_classifier,
     check_img_size,
     check_imshow,
@@ -20,8 +21,8 @@ from utils.general import (
     strip_optimizer,
     xyxy2xywh,
 )
-from utils.plots import plot_one_box
-from utils.torch_utils import TracedModel, load_classifier, select_device, time_synchronized
+from yolov7.utils.plots import plot_one_box
+from yolov7.utils.torch_utils import TracedModel, load_classifier, select_device, time_synchronized
 
 
 def detect(save_img=False):
