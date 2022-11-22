@@ -2,11 +2,14 @@
 
 from pathlib import Path
 
+from PIL import Image
+
+from yolov7.models.common import autoShape
 from yolov7.models.experimental import attempt_load
 from yolov7.utils.torch_utils import TracedModel, torch
 
 
-def load_model(model_path, device=None, verbose=False, trace=True, size=640, half=False):
+def load_model(model_path, autoshape=True, device=None, verbose=False, trace=True, size=640, half=False):
     """
     Creates a specified YOLOv7 model
     Arguments:
@@ -33,6 +36,9 @@ def load_model(model_path, device=None, verbose=False, trace=True, size=640, hal
     if trace:
         model = TracedModel(model, device, size)
 
+    if autoshape:
+        model = autoShape(model)
+
     if half:
         model.half()
 
@@ -46,6 +52,7 @@ class Yolov7Detector:
         if load_on_init:
             Path(model_path).parents[0].mkdir(parents=True, exist_ok=True)
             self.model = load_model(model_path=self.model_path, device=self.device, trace=True, size=640)
+
         else:
             self.model = None
 
@@ -64,3 +71,11 @@ class Yolov7Detector:
         assert self.model is not None, "before predict, you need to call .load_model()"
         results = self.model(imgs=image_list, size=size, augment=augment)
         return results
+
+
+if __name__ == "__main__":
+    model_path = "yolov7-tiny.pt"
+    device = "cuda:0"
+    model = load_model(model_path, device, trace=True, size=640)
+    imgs = [Image.open(x) for x in Path("inference/images").glob("*.jpg")]
+    results = model(imgs, size=640, augment=False)

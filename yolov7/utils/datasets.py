@@ -25,7 +25,8 @@ from torchvision.ops import ps_roi_align, ps_roi_pool, roi_align, roi_pool
 # from pycocotools import mask as maskUtils
 from torchvision.utils import save_image
 from tqdm import tqdm
-from utils.general import (
+
+from yolov7.utils.general import (
     check_requirements,
     clean_str,
     resample_segments,
@@ -36,7 +37,7 @@ from utils.general import (
     xywhn2xyxy,
     xyxy2xywh,
 )
-from utils.torch_utils import torch_distributed_zero_first
+from yolov7.utils.torch_utils import torch_distributed_zero_first
 
 # Parameters
 help_url = "https://github.com/ultralytics/yolov5/wiki/Train-Custom-Data"
