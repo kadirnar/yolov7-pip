@@ -5,12 +5,12 @@ from copy import deepcopy
 logger = logging.getLogger(__name__)
 import torch
 
-from yolov7.models.common import *
-from yolov7.models.experimental import *
-from yolov7.utils.autoanchor import check_anchor_order
-from yolov7.utils.general import check_file, make_divisible, set_logging
-from yolov7.utils.loss import SigmoidBin
-from yolov7.utils.torch_utils import (
+from models.common import *
+from models.experimental import *
+from utils.autoanchor import check_anchor_order
+from utils.general import check_file, make_divisible, set_logging
+from utils.loss import SigmoidBin
+from utils.torch_utils import (
     copy_attr,
     fuse_conv_and_bn,
     initialize_weights,

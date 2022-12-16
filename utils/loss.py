@@ -4,8 +4,8 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from yolov7.utils.general import bbox_alpha_iou, bbox_iou, box_ciou, box_diou, box_giou, box_iou, xywh2xyxy
-from yolov7.utils.torch_utils import is_parallel
+from utils.general import bbox_alpha_iou, bbox_iou, box_ciou, box_diou, box_giou, box_iou, xywh2xyxy
+from utils.torch_utils import is_parallel
 
 
 def smooth_BCE(eps=0.1):  # https://github.com/ultralytics/yolov3/issues/238#issuecomment-598028441

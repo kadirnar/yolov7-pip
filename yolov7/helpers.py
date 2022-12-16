@@ -4,9 +4,9 @@ from pathlib import Path
 
 from PIL import Image
 
-from yolov7.models.common import autoShape
-from yolov7.models.experimental import attempt_load
-from yolov7.utils.torch_utils import TracedModel, torch
+from models.common import autoShape
+from models.experimental import attempt_load
+from utils.torch_utils import TracedModel, torch
 
 
 def load_model(model_path, autoshape=True, device=None, trace=True, size=640, half=False):
