@@ -11,10 +11,10 @@ import torch.nn.functional as F
 from PIL import Image
 from torch.cuda import amp
 
-from utils.datasets import letterbox
-from utils.general import increment_path, make_divisible, non_max_suppression, scale_coords, xyxy2xywh
-from utils.plots import color_list, plot_one_box
-from utils.torch_utils import copy_attr, time_synchronized
+from yolov7.utils.datasets import letterbox
+from yolov7.utils.general import increment_path, make_divisible, non_max_suppression, scale_coords, xyxy2xywh
+from yolov7.utils.plots import color_list, plot_one_box
+from yolov7.utils.torch_utils import copy_attr, time_synchronized
 
 ##### basic ####
 

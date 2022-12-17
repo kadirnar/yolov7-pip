@@ -1,12 +1,22 @@
 # https://github.com/fcakyon/yolov5-pip/blob/main/yolov5/helpers.py
 
+import sys
+from pathlib import Path
+
+import torch
+
+FILE = Path(__file__).resolve()
+ROOT = FILE.parents[0]  # YOLOv5 root directory
+if str(ROOT) not in sys.path:
+    sys.path.append(str(ROOT))  # add ROOT to PATH
+
 from pathlib import Path
 
 from PIL import Image
 
-from models.common import autoShape
-from models.experimental import attempt_load
-from utils.torch_utils import TracedModel, torch
+from yolov7.models.common import autoShape
+from yolov7.models.experimental import attempt_load
+from yolov7.utils.torch_utils import TracedModel, torch
 
 
 def load_model(model_path, autoshape=True, device=None, trace=True, size=640, half=False):
