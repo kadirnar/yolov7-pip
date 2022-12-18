@@ -891,6 +891,9 @@ class autoShape(nn.Module):
 
     def __init__(self, model):
         super(autoShape, self).__init__()
+        """
+        The copy_attr function was added by @kadirnar.
+        """
         copy_attr(self, model, include=("yaml", "nc", "hyp", "names", "stride", "abc"), exclude=())  # copy attributes
         self.model = model.eval()
 
