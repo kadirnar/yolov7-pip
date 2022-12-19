@@ -4,7 +4,7 @@ import torch
 import torch.nn as nn
 
 from yolov7.models.common import Conv, DWConv
-from yolov7.utils.google_utils import attempt_download
+from yolov7.utils.google_utils import attempt_download, attempt_download_from_hub
 
 
 class CrossConv(nn.Module):
@@ -241,15 +241,13 @@ class End2End(nn.Module):
         return x
 
 
-
-
-
-def attempt_load(weights, map_location=None):
+def attempt_load(weights, map_location=None, hf_token=None):
     # Loads an ensemble of models weights=[a,b,c] or a single model weights=[a] or weights=a
     model = Ensemble()
     for w in weights if isinstance(weights, list) else [weights]:
-        attempt_download(w)
-        ckpt = torch.load(w, map_location=map_location)  # load
+        save_path = attempt_download_from_hub(w, hf_token=hf_token)
+
+        ckpt = torch.load(save_path, map_location=map_location)  # load
         model.append(ckpt['ema' if ckpt.get('ema') else 'model'].float().fuse().eval())  # FP32 model
     
     # Compatibility updates

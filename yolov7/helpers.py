@@ -19,7 +19,7 @@ from yolov7.models.experimental import attempt_load
 from yolov7.utils.torch_utils import TracedModel, torch
 
 
-def load_model(model_path, autoshape=True, device=None, trace=True, size=640, half=False):
+def load_model(model_path, autoshape=True, device=None, trace=True, size=640, half=False, hf_token=None):
     """
     Creates a specified YOLOv7 model
     Arguments:
@@ -38,8 +38,7 @@ def load_model(model_path, autoshape=True, device=None, trace=True, size=640, ha
         device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     elif type(device) is str:
         device = torch.device(device)
-
-    model = attempt_load(model_path, map_location=device)
+    model = attempt_load(model_path, map_location=device, hf_token=hf_token)
     if trace:
         model = TracedModel(model, device, size)
 
@@ -53,8 +52,8 @@ def load_model(model_path, autoshape=True, device=None, trace=True, size=640, ha
 
 
 if __name__ == "__main__":
-    model_path = "yolov7-tiny.pt"
+    repo_id = "kadirnar/yolov7-v0.1"
     device = "cuda:0"
-    model = load_model(model_path, device, trace=True, size=640)
+    model = load_model(repo_id, device, trace=True, size=640, hf_token=None)
     imgs = [Image.open(x) for x in Path("inference/images").glob("*.jpg")]
     results = model(imgs, size=640, augment=False)
