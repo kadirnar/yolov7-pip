@@ -21,6 +21,7 @@ import yolov7
 
 # load pretrained or custom model
 model = yolov7.load('yolov7.pt')
+#model = yolov7.load('kadirnar/yolov7-v0.1', hf_model=True)
 
 # set model parameters
 model.conf = 0.25  # NMS confidence threshold
