@@ -17,10 +17,10 @@ from PIL import Image
 from yolov7.models.common import autoShape
 from yolov7.models.experimental import attempt_load
 from yolov7.utils.google_utils import attempt_download_from_hub, attempt_download
-from yolov7.utils.torch_utils import TracedModel, torch
+from yolov7.utils.torch_utils import TracedModel
 
 
-def load_model(model_path, autoshape=True, device='cpu', trace=True, size=640, half=False, hf_model=False):
+def load_model(model_path, autoshape=True, device='cpu', trace=False, size=640, half=False, hf_model=False):
     """
     Creates a specified YOLOv7 model
     Arguments:
@@ -53,8 +53,8 @@ def load_model(model_path, autoshape=True, device='cpu', trace=True, size=640, h
 
 
 if __name__ == "__main__":
-    model_path = "kadirnar/yolov7-v0.1"
+    model_path = "yolov7.pt"
     device = "cuda:0"
-    model = load_model(model_path, device, trace=True, size=640, hf_model=True)
+    model = load_model(model_path, device, trace=False, size=640, hf_model=False)
     imgs = [Image.open(x) for x in Path("inference/images").glob("*.jpg")]
     results = model(imgs, size=640, augment=False)
