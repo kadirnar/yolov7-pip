@@ -85,7 +85,7 @@ def attempt_download(file, repo="WongKinYiu/yolov7"):
                     file.unlink(missing_ok=True)  # remove partial downloads
                     print(f"ERROR: Download failure: {msg}")
                 print("")
-                return
+                return file
     return str(file)  # return file
 
 def gdrive_download(id='', file='tmp.zip'):
