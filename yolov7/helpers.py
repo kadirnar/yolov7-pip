@@ -3,8 +3,6 @@
 import sys
 from pathlib import Path
 
-import torch
-
 FILE = Path(__file__).resolve()
 ROOT = FILE.parents[0]  # YOLOv5 root directory
 if str(ROOT) not in sys.path:
@@ -35,7 +33,7 @@ def load_model(model_path, autoshape=True, device='cpu', trace=False, size=640, 
     (Adapted from yolov7.hubconf.create)
     """
     if hf_model:
-        model_file = attempt_download_from_hub(model_path, hf_token=None)
+        model_file = attempt_download_from_hub(model_path)
     else:
         model_file = attempt_download(model_path)
     
